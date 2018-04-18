@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.1'
+    }
+}
+
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+
+    apply plugin: 'com.android.library'
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '27.0.3'
+
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 16
+        versionCode 1
+        versionName '0.0.1'
+    }
+
+    buildTypes {
+        release {
+        }
+        debug {
+
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.apptentive:apptentive-android:5.0.2'
+}
+
+
+task deleteAll(type: Delete) {
+    delete 'release'
+    outputs.upToDateWhen { false }
+}
+
+task exportAAR(type: Copy) {
+
+    outputs.upToDateWhen { return false }
+    from('build/outputs/aar/')
+    into('release/')
+    include('sdk-release.aar')
+    rename('sdk-release.aar', 'com.gameofwhales.sdk-' + android.defaultConfig.versionName + '.aar')
+}
+
+build.finalizedBy deleteAll
+build.finalizedBy exportAAR
+
+task copy2plugin(type: Copy) {
+    outputs.upToDateWhen { return false }
+    from('release')
+    into('../../gow.sdk/AndroidUnityPlugin/app/sdk/')
+    include('com.gameofwhales.sdk-' + android.defaultConfig.versionName + '.aar')
+    rename('com.gameofwhales.sdk-' + android.defaultConfig.versionName + '.aar', 'com.gameofwhales.sdk.aar')
+
+}
+
+task copy2unity(type: Copy) {
+    outputs.upToDateWhen { return false }
+    from('release')
+    into('../../gow.sdk/Game Of Whales Unity SDK/Assets/GameOfWhales/Plugins/Android/')
+    include('com.gameofwhales.sdk-' + android.defaultConfig.versionName + '.aar')
+}
