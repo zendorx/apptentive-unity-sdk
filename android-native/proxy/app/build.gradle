@@ -1,0 +1,49 @@
+apply plugin: 'com.android.library'
+
+android {
+
+    dexOptions {
+        preDexLibraries = false
+        javaMaxHeapSize "4g"
+    }
+
+    compileSdkVersion 26
+    buildToolsVersion "27.0.3"
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 16
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':unity')
+
+
+    api(name:'com.nikaent.apptentive', ext:'aar')
+}
+
+task deleteAll(type: Delete) {
+    delete 'release'
+    outputs.upToDateWhen { return false }
+}
+
+
+task exportAAR(type: Copy) {
+
+    outputs.upToDateWhen { return false }
+    from('build/outputs/aar/')
+    into('../../Game Of Whales Unity SDK/Assets/GameOfWhales/Plugins/Android/')
+    include('app-release.aar')
+    rename('app-release.aar', 'gameofwhales-unity-2.0.10.aar')
+
+}
+
+build.finalizedBy deleteAll
+build.finalizedBy exportAAR

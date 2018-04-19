@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class ApptentiveHandler {
 
-    private String                      TAG = "Apptentive";
+    private static String               TAG = "ApptentiveHandler";
     private static String               VERSION_SDK = "0.0.1";
     private static ApptentiveHandler    INSTANCE;
     private final Application           application;
@@ -26,16 +26,19 @@ public class ApptentiveHandler {
     private UnreadMessagesListener      unreadMessageCountListener;
     private boolean                     canShowMessageCenter;
 
-    public void Initialize(final Application application, final Activity activity, final String APP_KEY, final String APP_SIG)
+    public static ApptentiveHandler Initialize(final Application application, final Activity activity, final String APP_KEY, final String APP_SIG)
     {
         if (INSTANCE == null)
         {
             INSTANCE = new ApptentiveHandler(application, activity, APP_KEY, APP_SIG);
+            return INSTANCE;
         }
         else
         {
-            L.e(TAG, "SDK already initialized.");
+            L.e(ApptentiveHandler.TAG, "SDK already initialized.");
         }
+
+        return null;
     }
 
     private ApptentiveHandler(final Application application, final Activity activity, final String APP_KEY, final String APP_SIG)

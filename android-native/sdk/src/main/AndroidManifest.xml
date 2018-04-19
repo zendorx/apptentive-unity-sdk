@@ -1,32 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    package="com.gameofwhales.sdk">
+    package="com.nikaent.apptentive">
 
     <application>
-
-
-
-        <service
-            android:name="com.gameofwhales.sdk.util.GOWPushService"
-            android:exported="false" >
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-            </intent-filter>
-        </service>
-
-        <service
-            android:name="com.gameofwhales.sdk.util.GOWGCMService"
-            android:exported="false">
-        </service>
-
     </application>
-
-
        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
        <uses-permission android:name="android.permission.INTERNET" />
-       <!-- Pushes -->
-       <uses-permission android:name="android.permission.WAKE_LOCK" /><!-- Need to use WakefulBroadcastReceiver -->
-       <!--uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-       <permission android:name=".permission.C2D_MESSAGE" android:protectionLevel="signature" />
-       <uses-permission android:name=".permission.C2D_MESSAGE" /-->
 </manifest>

@@ -1,4 +1,0 @@
-include ':app'
-
-include 'com.nika.apptentive'
-project(':com.nika.apptentive').projectDir = new File('../sdk')
