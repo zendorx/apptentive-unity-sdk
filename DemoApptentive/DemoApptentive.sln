@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApptentive", "DemoApptentive.csproj", "{1A297EF1-8C60-97F7-2BC5-CC81899FFAFC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApptentive.Editor.Plugins", "DemoApptentive.Editor.Plugins.csproj", "{A7C4454E-D4CB-4665-7C2B-5B6B547CC70D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A297EF1-8C60-97F7-2BC5-CC81899FFAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A297EF1-8C60-97F7-2BC5-CC81899FFAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A297EF1-8C60-97F7-2BC5-CC81899FFAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A297EF1-8C60-97F7-2BC5-CC81899FFAFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C4454E-D4CB-4665-7C2B-5B6B547CC70D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C4454E-D4CB-4665-7C2B-5B6B547CC70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C4454E-D4CB-4665-7C2B-5B6B547CC70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C4454E-D4CB-4665-7C2B-5B6B547CC70D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

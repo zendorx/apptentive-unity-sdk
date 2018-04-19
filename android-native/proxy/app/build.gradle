@@ -39,9 +39,9 @@ task exportAAR(type: Copy) {
 
     outputs.upToDateWhen { return false }
     from('build/outputs/aar/')
-    into('../../Game Of Whales Unity SDK/Assets/GameOfWhales/Plugins/Android/')
+    into('../../../DemoApptentive/Assets/Apptentive/Plugins/Android/')
     include('app-release.aar')
-    rename('app-release.aar', 'gameofwhales-unity-2.0.10.aar')
+    rename('app-release.aar', 'apptentive-unity-0.0.1.aar')
 
 }
 

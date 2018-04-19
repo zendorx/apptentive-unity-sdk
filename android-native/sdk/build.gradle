@@ -77,6 +77,6 @@ task copy2plugin(type: Copy) {
 task copy2unity(type: Copy) {
     outputs.upToDateWhen { return false }
     from('release')
-    into('../../gow.sdk/Game Of Whales Unity SDK/Assets/GameOfWhales/Plugins/Android/')
+    into('../../DemoApptentive/Assets/Apptentive/Plugins/Android/')
     include('com.nikaent.apptentive-' + android.defaultConfig.versionName + '.aar')
 }
