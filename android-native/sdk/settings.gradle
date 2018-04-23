@@ -1,0 +1,2 @@
+include 'apptentive'
+project(':apptentive').projectDir = new File('../apptentive')

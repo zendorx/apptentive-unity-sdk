@@ -5,3 +5,5 @@ android-native/proxy/.idea/
 DemoApptentive/Library/
 DemoApptentive/Assets/Plugins/Editor/ScriptInspector3/Scripts/TabSwitcher.cs
 DemoApptentive/Assets/Plugins/
+android-native/apptentive/build/
+DemoApptentive/Temp/

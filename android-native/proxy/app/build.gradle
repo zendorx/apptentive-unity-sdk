@@ -41,7 +41,7 @@ task exportAAR(type: Copy) {
     from('build/outputs/aar/')
     into('../../../DemoApptentive/Assets/Apptentive/Plugins/Android/')
     include('app-release.aar')
-    rename('app-release.aar', 'apptentive-unity-0.0.1.aar')
+    rename('app-release.aar', 'apptentive-unity-0.0.2.aar')
 
 }
 

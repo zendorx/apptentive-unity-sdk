@@ -1,12 +1,14 @@
 package com.nikaent.apptentive;
 
+import com.apptentive.android.sdk.Apptentive;
 import android.app.Activity;
 import android.app.Application;
 import android.util.Log;
 
-import com.apptentive.android.sdk.Apptentive;
-import com.apptentive.android.sdk.module.messagecenter.UnreadMessagesListener;
+//import com.apptentive.android.sdk.Apptentive;
+//import com.apptentive.android.sdk.module.messagecenter.UnreadMessagesListener;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -16,14 +18,14 @@ import java.util.Map;
 public class ApptentiveHandler {
 
     private static String               TAG = "ApptentiveHandler";
-    private static String               VERSION_SDK = "0.0.1";
+    private static String               VERSION_SDK = "0.0.2";
     private static ApptentiveHandler    INSTANCE;
     private final Application           application;
     private final Activity              activity;
     private String                      appKey;
     private String                      appSig;
     private int                         unreadMessageCount;
-    private UnreadMessagesListener      unreadMessageCountListener;
+    //private UnreadMessagesListener      unreadMessageCountListener;
     private boolean                     canShowMessageCenter;
 
     public static ApptentiveHandler Initialize(final Application application, final Activity activity, final String APP_KEY, final String APP_SIG)
@@ -51,9 +53,9 @@ public class ApptentiveHandler {
         this.appKey = APP_KEY;
         this.appSig = APP_SIG;
 
-        Apptentive.register(application, APP_KEY, APP_SIG);
+        //Apptentive.register(application, APP_KEY, APP_SIG);
 
-        unreadMessageCountListener = new UnreadMessagesListener() {
+        /*unreadMessageCountListener = new UnreadMessagesListener() {
             @Override
             public void onUnreadMessageCountChanged(int unreadMessages) {
                 unreadMessageCount = unreadMessages;
@@ -66,19 +68,48 @@ public class ApptentiveHandler {
             @Override
             public void onFinish(boolean canShowMessageCenter) {
                 ApptentiveHandler.this.canShowMessageCenter = canShowMessageCenter;
-            }});
+            }});*/
 
     }
 
-    /*json format:
+
+    /*
+    *
     * {
-    *   [
-    *       {"key":"value"},
-    *       {"key2":"value2"},
-    *       {"key3":"value3"}
-    *   ]
+    *   "key":"value",
+    *   "key2":"value2",
+    *   "key3":"value3"
     * }
-    */
+    * */
+
+    public void setUserData(final String json_data)
+    {
+        activity.runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                try
+                {
+                    JSONObject jsonObj = new JSONObject(json_data);
+                    Iterator<String> nameItr = jsonObj.keys();
+                    Map<String, String> mp = new HashMap<String, String>();
+                    while(nameItr.hasNext())
+                    {
+                        final String id = nameItr.next();
+                        final String value = jsonObj.getString(id);
+                        mp.put(id, value);
+                    }
+
+                    Apptentive.setCustomPersonData(activity, mp);
+                }
+                catch (JSONException e)
+                {
+                    Log.i(TAG, "setUserData json exception");
+                }
+            }
+        });
+    }
 
     public boolean canShowMessageCenter()
     {
@@ -111,17 +142,17 @@ public class ApptentiveHandler {
 
     public void showMessageCenterWithData(final Map<String, Object> customData)
     {
-        activity.runOnUiThread(new Runnable() {
+        /*activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 Apptentive.showMessageCenter(activity, customData);
-            }});
+            }});*/
     }
 
     public void showMessageCenter()
     {
-        if (!canShowMessageCenter)
-            return;
+        /*if (!canShowMessageCenter)
+            return;*/
 
         activity.runOnUiThread(new Runnable() {
             @Override
@@ -132,16 +163,18 @@ public class ApptentiveHandler {
 
     public void engage(final String eventID)
     {
+        //Apptentive.engage(activity, eventID);
         Apptentive.engage(activity, eventID);
     }
 
     public void showHiddenText(final String text)
     {
-        Apptentive.sendAttachmentText(text);
+        //Apptentive.sendAttachmentText(text);
     }
 
     public int getUnreadMessageCount()
     {
-        return unreadMessageCount;
+        //return unreadMessageCount;
+        return Apptentive.getUnreadMessageCount(activity);
     }
 }

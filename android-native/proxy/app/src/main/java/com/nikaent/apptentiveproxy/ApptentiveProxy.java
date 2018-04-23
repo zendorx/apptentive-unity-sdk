@@ -52,6 +52,16 @@ public class ApptentiveProxy {
         return handler != null;
     }
 
+    public void setUserData(final String json_data)
+    {
+        if (!isReady())
+        {
+            return;
+        }
+
+        handler.setUserData(json_data);
+    }
+
     public boolean canShowMessageCenter()
     {
         if (!isReady())
